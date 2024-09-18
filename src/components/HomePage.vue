@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue'
+import { RouterLink } from 'vue-router';
 
 defineProps({
   msg: String,
@@ -22,15 +23,36 @@ onMounted(async() => {
 </script>
 
 <template>
+
+
   <h1>{{ msg }}</h1>
   <h2> Nos produits </h2>
-  <div v-for="product of products">
-    <h3> {{ product.type }}</h3>
-    <P> {{ product.prix }}€</P>
+  <div v-for="product of products" class="product-list-container">
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.type }}</h5>
+    <p class="card-text">{{ product.prix }}€</p>
+    <button class="btn btn-primary">
+
+      <RouterLink class="btn btn-primary" :to="{ name: 'single-product', params: { _id: product._id }}">
+        Voir le produit
+      </RouterLink> 
+    </button>
+  </div>
+</div>
+
+
    </div>
+
+   
+
 
 </template>
 
 <style scoped>
-
+  .product-list-container{
+    display: flex;
+    flex-wrap: wrap;
+  }
 </style>

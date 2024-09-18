@@ -34,6 +34,8 @@ async function Login() {
 
         if(res.data != null){
             alert("Vous êtes maintenant connecté, " + loginUsername.value)
+        }else{
+            alert("Identifiants invalides")
         }
         
     } catch (error) {
@@ -72,7 +74,7 @@ async function Login() {
 
 <template>
 
-    <h1> Connectez-vous et obtenez des réductions exclusives  </h1>
+    <h3> Connectez-vous et obtenez des réductions exclusives  </h3>
     <form class="mb-5 mt-4 mx-5">
         <div class="form-group">
             <label> Pseudo </label>

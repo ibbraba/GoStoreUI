@@ -4,14 +4,18 @@ import { RouterLink, RouterView } from 'vue-router';
 import HomePage from './components/HomePage.vue';
 import Login from './components/Login.vue';
 import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 </script>
 
 <template>
 
   <Header></Header>  
-  <RouterView/>
+  <div id="page-content">
+    <RouterView/>
 
+  </div>
 
+  <Footer></Footer>
 </template>
 
 
