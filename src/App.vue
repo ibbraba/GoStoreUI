@@ -1,12 +1,20 @@
 <script setup>
 
+import { RouterLink, RouterView } from 'vue-router';
 import HomePage from './components/HomePage.vue';
+import Login from './components/Login.vue';
+import Header from './components/Header.vue';
 </script>
 
 <template>
-  <HomePage msg="Bienvenue chez GoStore"></HomePage>
-  <h2>Test app.vue</h2>
+
+  <Header></Header>  
+  <RouterView/>
+
+
 </template>
+
+
 
 <style scoped>
 .logo {
