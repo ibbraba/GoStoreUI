@@ -2,10 +2,16 @@
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useCartStore } from '../store/cart';
 
 const route = useRoute()
 const _id = route.params._id
 console.log(route.params._id);
+
+
+//Calls cart store
+const store = useCartStore()
+
 
 const product = ref({})
 
@@ -31,7 +37,7 @@ onMounted(() => {
     <P>{{ product.description }}</P>
     <img :src="product.imageurl" alt="Card image cap">
     <p>{{ product.prix }}€ </p>
-    <button class="btn btn-primary"> Ajouter au panier  </button>
+    <button @click.prevent="store.addProductToCart(product)" class="btn btn-primary"> Ajouter au panier  </button>
 
 </template>
 

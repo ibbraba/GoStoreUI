@@ -27,6 +27,9 @@ const user = ref((JSON.parse(localStorage.getItem('user'))))
                     <RouterLink v-if="user":to="{ name: 'my-page', params : { _id : user.id}}">{{user.username}}</RouterLink>    
                     <RouterLink v-else :to="{ name: 'login' }">Login</RouterLink>
                 </li>
+                <li>
+                    <RouterLink :to="{name : 'cart'}"> Panier </RouterLink>
+                </li>
             </ul>
         </nav>
 
