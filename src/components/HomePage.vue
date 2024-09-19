@@ -3,11 +3,25 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router';
 
+
 defineProps({
   msg: String,
 })
 
+//Script pn first page load
+onMounted(async() => {
+
+    
+  
+  let res = await LoadProducts()
+
+})
+
 const count = ref(0) 
+
+
+
+
 const products = ref([])
 async function LoadProducts() {
     let res = await axios.get("http://localhost:3000/products")
@@ -15,10 +29,6 @@ async function LoadProducts() {
     products.value = res.data
 }
 
-//Script pn first page load
-onMounted(async() => {
-    let res = await LoadProducts()
-})
 
 </script>
 
@@ -29,7 +39,7 @@ onMounted(async() => {
   <h2> Nos produits </h2>
   <div v-for="product of products" class="product-list-container">
     <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
+  <img class="card-img-top"  :src="product.imageurl" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ product.type }}</h5>
     <p class="card-text">{{ product.prix }}€</p>
@@ -54,5 +64,6 @@ onMounted(async() => {
   .product-list-container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 </style>

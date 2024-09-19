@@ -1,8 +1,11 @@
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { ensureValidToken } from '../userRequests';
+
 const router = useRouter()
+
 
 
 const loginUsername = ref("")
@@ -17,8 +20,25 @@ const adress = ref("")
 const zipcode = ref("")
 const country = ref("")
 
+
+onMounted(() => {
+
+    
+
+    // Redirect to user page if already connected 
+    const token = ensureValidToken()
+    const user = JSON.parse(localStorage.getItem('user'))
+    console.log(user);
+    if(token && user ){
+        router.push("/my-page/" + user.id)
+    }
+})
+
 async function Login() {
    
+
+
+
     try {
 
         console.log(loginUsername.value);
@@ -39,7 +59,10 @@ async function Login() {
             localStorage.setItem("token" , res.data.token)
             localStorage.setItem("user", JSON.stringify(res.data.user))
             alert("Vous êtes maintenant connecté, " + loginUsername.value)
-            router.push({path :"/"})
+          
+            //Redirection
+            await router.push({path :"/"})
+            router.go(0)
         }else{
             alert("Identifiants invalides")
         }
@@ -71,6 +94,8 @@ async function Login() {
             
         }
         
+
+
 }
 
 

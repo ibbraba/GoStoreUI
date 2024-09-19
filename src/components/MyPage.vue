@@ -39,7 +39,10 @@ async function getUser() {
 async function Logout() {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
-    router.push("/")
+
+    //Redirection
+    await router.push("/")
+    router.go(0)
     }
 
 

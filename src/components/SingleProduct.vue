@@ -29,6 +29,7 @@ onMounted(() => {
 <template>
     <h3> {{ product.type }}</h3>
     <P>{{ product.description }}</P>
+    <img :src="product.imageurl" alt="Card image cap">
     <p>{{ product.prix }}€ </p>
     <button class="btn btn-primary"> Ajouter au panier  </button>
 

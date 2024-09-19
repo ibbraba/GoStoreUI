@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router';
 //Gets the user in localstorage
 
 const user = ref((JSON.parse(localStorage.getItem('user'))))
-console.log(user.value);
+
 
 
 </script>
