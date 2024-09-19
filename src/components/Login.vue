@@ -1,6 +1,8 @@
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
 
 const loginUsername = ref("")
@@ -33,7 +35,11 @@ async function Login() {
         
 
         if(res.data != null){
+            console.log(res);
+            localStorage.setItem("token" , res.data.token)
+            localStorage.setItem("user", JSON.stringify(res.data.user))
             alert("Vous êtes maintenant connecté, " + loginUsername.value)
+            router.push({path :"/"})
         }else{
             alert("Identifiants invalides")
         }
@@ -59,16 +65,16 @@ async function Login() {
                 "zipcode": zipcode.value,
                 "country": country.value,
             })
-            alert("Vous êtes enregistré, vous ouvez maintenant vous connecter.")
+            alert("Vous êtes enregistré, vous pouvez maintenant vous connecter.")
         } catch (error) {
             console.log(error);
             
         }
         
-  }
-    
-    
+}
 
+
+ 
     
 </script>
 

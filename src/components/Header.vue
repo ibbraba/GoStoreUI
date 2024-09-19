@@ -1,6 +1,11 @@
 <script setup>
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
+//Gets the user in localstorage
+
+const user = ref((JSON.parse(localStorage.getItem('user'))))
+console.log(user.value);
 
 
 </script>
@@ -19,7 +24,8 @@ import { RouterLink } from 'vue-router';
                     <RouterLink :to="{ name: 'home' }">HomePage</RouterLink>
                 </li>
                 <li>
-                    <RouterLink :to="{ name: 'login' }">Login</RouterLink>
+                    <RouterLink v-if="user":to="{ name: 'my-page', params : { _id : user.id}}">{{user.username}}</RouterLink>    
+                    <RouterLink v-else :to="{ name: 'login' }">Login</RouterLink>
                 </li>
             </ul>
         </nav>
