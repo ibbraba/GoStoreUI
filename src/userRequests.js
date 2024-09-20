@@ -16,11 +16,11 @@ export async function ensureValidToken() {
         })
 
         if(res.data == true){
-            console.log("Token valide")
+            console.log("Response: Token valide")
             return true;
             
         }else{
-            console.log("Token invalide");
+            console.log("Response: Token invalide");
             return false
         }
     }

@@ -10,6 +10,4 @@ export const routes = [
     {path : "/product/:_id", component : SingleProduct, name:"single-product"},
     {path : "/my-page/:_id", component: MyPage, name:"my-page"},
     {path : "/cart", component : Cart, name:"cart"},
-
-    
 ]

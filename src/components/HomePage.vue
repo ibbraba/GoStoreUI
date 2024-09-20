@@ -10,11 +10,7 @@ defineProps({
 
 //Script pn first page load
 onMounted(async() => {
-
-    
-  
   let res = await LoadProducts()
-
 })
 
 const count = ref(0) 
@@ -23,6 +19,8 @@ const count = ref(0)
 
 
 const products = ref([])
+
+//Fetch products from DB
 async function LoadProducts() {
     let res = await axios.get("http://localhost:3000/products")
     console.log(res.data);

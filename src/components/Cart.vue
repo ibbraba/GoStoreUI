@@ -1,7 +1,7 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 
-
+//Using store
 const store = useCartStore()
 
 </script>

@@ -21,41 +21,30 @@ const zipcode = ref("")
 const country = ref("")
 
 
-onMounted(() => {
+onMounted(async() => {
 
-    
-
-    // Redirect to user page if already connected 
-    const token = ensureValidToken()
+    // Redirects to user page if already connected 
+    const token = await ensureValidToken()
     const user = JSON.parse(localStorage.getItem('user'))
-    console.log(user);
     if(token && user ){
-        router.push("/my-page/" + user.id)
+        await router.push("/my-page/" + user.id)
+        router.go(0)
     }
 })
 
 async function Login() {
    
-
-
-
     try {
-
-        console.log(loginUsername.value);
-        console.log(loginPassword.value);
-        
-        
-    
+         
+        //Sending login request to backend
         const res = await axios.post("http://localhost:3000/login", {
         "username" : loginUsername.value, 
         "password" : loginPassword.value
         })
-        
-        console.log(res.data);
-        
-
+    
+    
         if(res.data != null){
-            console.log(res);
+            //Store user data and token in localstorage
             localStorage.setItem("token" , res.data.token)
             localStorage.setItem("user", JSON.stringify(res.data.user))
             alert("Vous êtes maintenant connecté, " + loginUsername.value)
@@ -77,6 +66,7 @@ async function Login() {
         
         //TODO: Validation
         
+        //Register the user in DB
         try {
             const res = await axios.post("http://localhost:3000/register", {
                 "username": registerUsernme.value,
@@ -90,12 +80,9 @@ async function Login() {
             })
             alert("Vous êtes enregistré, vous pouvez maintenant vous connecter.")
         } catch (error) {
-            console.log(error);
-            
+            console.log(error)  
+            alert("Une erreur est survenue, veuillez ressayer")     
         }
-        
-
-
 }
 
 

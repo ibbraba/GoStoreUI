@@ -5,9 +5,6 @@ import { useRoute, useRouter } from 'vue-router';
 import { ensureValidToken } from '../userRequests';
 
 const router = useRouter()
-
-
-
 const user = ref({})
 
 
@@ -17,12 +14,16 @@ const id = route.params._id
 
 async function getUser() {
 
+   
+    
     //Ensure token is valid 
     const tokenValid = await ensureValidToken()
 
     if (!tokenValid) {
-
-        router.push({ path: "/login" })
+        console.log("Get User : invalid token");
+        
+        await router.push({ path: "/login" })
+        router.go(0)
     }
 
     try {
@@ -30,7 +31,8 @@ async function getUser() {
         const res = await axios.get("http://localhost:3000/user/" + id)
         user.value = res.data
     } catch (error) {
-
+        console.log(error);
+        
     }
 
  
@@ -43,7 +45,7 @@ async function Logout() {
     //Redirection
     await router.push("/")
     router.go(0)
-    }
+}
 
 
 onMounted(() => {

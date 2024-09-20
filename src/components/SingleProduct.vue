@@ -6,7 +6,7 @@ import { useCartStore } from '../store/cart';
 
 const route = useRoute()
 const _id = route.params._id
-console.log(route.params._id);
+
 
 
 //Calls cart store
@@ -15,7 +15,7 @@ const store = useCartStore()
 
 const product = ref({})
 
-
+//Fetch product
 async function LoadProduct(params) {
     try {
         const res = await axios.get("http://localhost:3000/product/" + _id)
