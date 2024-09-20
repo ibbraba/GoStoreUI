@@ -12,18 +12,14 @@ export const useCartStore = defineStore("cart", ()=> {
         cart.value.push(product)
     }
 
-    //TODO ; Cart item deletion
+    //TODO ; Cart  deletion
     const removeProductFromCart = (product) =>{
         console.log("Product remoed from cart");
 
         
         let itemIndex = cart.value.findIndex(item => item._id == product._id)
-        cart.value = cart.value.filter(item => {
-            console.log(cart.value.indexOf(item));
-            
-            cart.value.indexOf(item) != itemIndex
 
-        })
+        cart.value.splice(itemIndex, 1)
        
         
 
