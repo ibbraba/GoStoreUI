@@ -18,11 +18,29 @@ export const useCartStore = defineStore("cart", ()=> {
     
     }
 
+    const getTotalAmount = ()=> {
+        if(cart.value.length > 0){
+           
+            console.log(cart.value.length);
+            let total = 0 
+            
+            for(let i=0; i<cart.value.length;i++){
+
+                total += cart.value[i].prix
+
+            }
+
+           
+            return total
+
+        }else return 0
+    }
 
     return{
         cart, 
         addProductToCart,
-        removeProductFromCart
+        removeProductFromCart, 
+        getTotalAmount
     }
 
 })

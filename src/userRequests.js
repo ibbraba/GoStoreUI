@@ -1,4 +1,7 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
+
 
 export async function ensureValidToken() {
     
@@ -17,6 +20,7 @@ export async function ensureValidToken() {
 
         if(res.data == true){
             console.log("Response: Token valide")
+            
             return true;
             
         }else{
@@ -25,3 +29,14 @@ export async function ensureValidToken() {
         }
     }
 } 
+
+export async function getConnectedUser(){
+
+    const validToken = ensureValidToken()
+    if(validToken){
+        const decodedJwt = jwtDecode(localStorage.getItem('token'))
+        return decodedJwt
+
+        
+    }else return null
+}
