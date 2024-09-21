@@ -1,7 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { ensureValidToken } from '../userRequests';
 
 const router = useRouter()
@@ -93,12 +93,12 @@ onMounted(() => {
 
                     <div class="command-qte">
                         <p>{{ new Date(command.date).toLocaleDateString() }}</p>
-                        <P>{{ command.products.length > 1 ? command.products.length + " articles" : command.products.length + " Sarticle" }}  </P>
+                        <P>{{ command.products.length > 1 ? command.products.length + " articles" : command.products.length + " article" }}  </P>
                     </div>
 
                     <div class="command-price">
                         <p>{{ command.price }} €</p>
-                        <button class="btn btn-primary"> Voir les details </button>
+                        <RouterLink :to="{ name: 'command', params : {id : command._id} }" :singleCommmand="command" class="btn btn-primary"> Voir les details </RouterLink>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import Cart from "./components/Cart.vue";
 import HomePage from "./components/HomePage.vue";
 import Login from "./components/Login.vue";
 import MyPage from "./components/MyPage.vue";
+import SingleCommand from "./components/SingleCommand.vue";
 import SingleProduct from "./components/SingleProduct.vue";
 
 export const routes = [
@@ -10,4 +11,5 @@ export const routes = [
     {path : "/product/:_id", component : SingleProduct, name:"single-product"},
     {path : "/my-page/:_id", component: MyPage, name:"my-page"},
     {path : "/cart", component : Cart, name:"cart"},
+    {path : "/command/:id", component : SingleCommand, name:"command"},
 ]
