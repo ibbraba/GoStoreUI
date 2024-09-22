@@ -74,7 +74,7 @@ async function Login() {
 
     async function registerUser(){
         
-        //TODO: Validation
+        //Validation
         if(registerUsernme.value == "" || registerPassword.value ==""
             || name.value =="" || firstname.value == ""
             || email.value == "" || adress.value == ""

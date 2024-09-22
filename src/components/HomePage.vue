@@ -43,7 +43,7 @@ async function LoadProducts() {
     <p class="card-text">{{ product.prix }}€</p>
     <button class="btn btn-light">
 
-      <RouterLink class="btn btn-light" :to="{ name: 'single-product', params: { _id: product._id }}">
+      <RouterLink class="btn btn-primary" :to="{ name: 'single-product', params: { _id: product._id }}">
         Voir le produit
       </RouterLink> 
     </button>

@@ -42,10 +42,11 @@ async function updateUser() {
             "country": user.value.country,
         })
         console.log(res.data);
+        alert("Modifications effectuées !")
 
     } catch (error) {
         console.log(error);
-
+        alert("Une erreur est survenue")
     }
 
 

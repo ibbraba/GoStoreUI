@@ -8,13 +8,15 @@ export const useCartStore = defineStore("cart", ()=> {
 
     const addProductToCart = (product) => {
             cart.value.push(product)
+            alert("L'élement a été ajouté au panier")
     }
 
     //TODO ; Cart  deletion
     const removeProductFromCart = (product) =>{
         
         let itemIndex = cart.value.findIndex(item => item._id == product._id)
-        cart.value.splice(itemIndex, 1)    
+        cart.value.splice(itemIndex, 1)  
+          
     
     }
 

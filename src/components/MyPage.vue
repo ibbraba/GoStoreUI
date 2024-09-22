@@ -61,7 +61,7 @@ onMounted(() => {
                 <p>Code postal: {{ user.zipcode }}</p>
                 <p>Pays : {{ user.country }}</p>
 
-                <RouterLink :to="{ name: 'edit-user', params: { _id: id } }"> Modifier les informations </RouterLink>
+                <RouterLink class="btn btn-primary" :to="{ name: 'edit-user', params: { _id: id } }"> Modifier les informations </RouterLink>
             </div>
         </div>
 

@@ -47,6 +47,7 @@ async function validateCommand() {
         console.log(res.data);
 
         //Redirect to profile
+        alert("Féliciatations, votre commande a été validée")
         router.push("/my-page/" + user.value.userId)
 
     } catch (error) {
