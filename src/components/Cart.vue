@@ -2,14 +2,16 @@
 import { onMounted, ref } from 'vue';
 import { useCartStore } from '../store/cart';
 import { ensureValidToken, getConnectedUser } from '../userRequests';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
+
 
 //Using store
 
 
 const store = useCartStore()
 const userlogged = ref(false)
+const router = useRouter()
 
 onMounted(async () => {
     userlogged.value = await getConnectedUser()
@@ -19,16 +21,19 @@ onMounted(async () => {
 
 async function CreateCommand() {
     
-    axios.post("http://localhost:3000/create-command", {
+    const res = await axios.post("http://localhost:3000/create-command", {
         "userid" : userlogged.value.userId,
         "date" : Date.now(),
         "price" : store.getTotalAmount(),
-        "products" : store.cart
+        "products" : store.cart,
+        "validated" : false
     })
+    console.log(res);
+    
+    let _id = res.data._id
     
 
-
-
+    router.push("/command/validate/" + _id)
 }
 
 
@@ -59,16 +64,16 @@ async function CreateCommand() {
         </div>
 
         <div class="total">
-            <p> Elements : {{ store.cart.length }} </p>
+            <p> Elements : {{ store.cart.length  }} </p>
             <p> Prix : {{ store.getTotalAmount().toFixed(2) }}€ </p>
 
             <button @click.prevent="CreateCommand" v-if="userlogged"> Valider le panier</button>
-            <RouterLink v-else :to="{ name: 'login' }" >Connectez-vous et sauvegardez votre panier</RouterLink>
+            <RouterLink class="btn btn-light" v-else :to="{ name: 'login' }" >Connectez-vous et sauvegardez votre panier</RouterLink>
         </div>
     </div>
 
-    <div v-else>
-        <h3>Votre panier est vide pour le moment</h3>
+    <div v-else class="mt-3">
+        <h5>Votre panier est vide pour le moment</h5>
 
     </div>
 
@@ -86,6 +91,7 @@ async function CreateCommand() {
 
 .card-body {
     display: flex;
+    justify-content: space-between;
 }
 
 .cart-item-details {

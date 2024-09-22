@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
-import { ensureValidToken } from '../userRequests';
+import { ensureValidToken, fetchUserInfos } from '../userRequests';
 
 const router = useRouter()
 const user = ref({})
@@ -12,25 +12,19 @@ const commands = ref({})
 const route = useRoute()
 const id = route.params._id
 
-async function fetchUserInfos() {
-    //Ensure token is valid 
-    const tokenValid = await ensureValidToken()
+async function getUser() {
 
-    if (!tokenValid) {
-        console.log("Get User : invalid token");
+    const res = await fetchUserInfos(id)
+    console.log(res);
 
-        await router.push({ path: "/login" })
-        router.go(0)
-    }
+    user.value = res.data
 
-    try {
-        //Fetch user data
-        const res = await axios.get("http://localhost:3000/user/" + id)
-        user.value = res.data
-    } catch (error) {
-        console.log(error);
+}
 
-    }
+async function getUserCommands(params) {
+
+    let res = await axios.get("http://localhost:3000/commands/" + id)
+    commands.value = res.data.commands
 }
 
 async function Logout() {
@@ -43,19 +37,11 @@ async function Logout() {
 }
 
 
-async function getUserCommands(params) {
 
-    let res = await axios.get("http://localhost:3000/commands/" + id)
-    console.log(res.data.commands);
-    commands.value = res.data.commands
-
-
-
-}
 
 onMounted(() => {
-    fetchUserInfos()
-    getUserCommands()
+     getUser()
+     getUserCommands()
 })
 
 
@@ -75,7 +61,7 @@ onMounted(() => {
                 <p>Code postal: {{ user.zipcode }}</p>
                 <p>Pays : {{ user.country }}</p>
 
-                <button> Modifier les informations </button>
+                <RouterLink :to="{ name: 'edit-user', params: { _id: id } }"> Modifier les informations </RouterLink>
             </div>
         </div>
 
@@ -83,22 +69,25 @@ onMounted(() => {
         <h2>Mes Commandes </h2>
 
         <div class="user-commands">
-       
+
 
             <div v-for="command in commands" class="card my-5" style="width: 68rem;">
                 <div class="card-body command-infos">
-                    <div> 
-                        <img class="command-img" :src= command.products[0].imageurl  alt="">
+                    <div>
+                        <img class="command-img" :src=command.products[0].imageurl alt="">
                     </div>
 
                     <div class="command-qte">
                         <p>{{ new Date(command.date).toLocaleDateString() }}</p>
-                        <P>{{ command.products.length > 1 ? command.products.length + " articles" : command.products.length + " article" }}  </P>
+                        <P>{{ command.products.length > 1 ? command.products.length + " articles" :
+                            command.products.length + " article" }} </P>
+                        <p>{{ command.validated ? "Payée" : "En attente de paiement" }}</p>
                     </div>
 
                     <div class="command-price">
                         <p>{{ command.price }} €</p>
-                        <RouterLink :to="{ name: 'command', params : {id : command._id} }" :singleCommmand="command" class="btn btn-primary"> Voir les details </RouterLink>
+                        <RouterLink :to="{ name: 'command', params: { id: command._id } }" :singleCommmand="command"
+                            class="btn btn-primary"> Voir les details </RouterLink>
                     </div>
                 </div>
             </div>
@@ -114,28 +103,28 @@ onMounted(() => {
 
 
 <style scoped>
-
-.user-infos{
+.user-infos {
     margin: 0 auto;
 }
 
-.command-infos{
+.command-infos {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.command-qte{
+.command-qte {
     display: flex;
     flex-direction: column;
     margin-right: 40%;
 }
 
-.command-img{
+.command-img {
     max-width: 150px;
 }
 
-.command-qte, .command-price{
-    padding-top : 35px
+.command-qte,
+.command-price {
+    padding-top: 35px
 }
 </style>

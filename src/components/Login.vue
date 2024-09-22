@@ -34,6 +34,11 @@ onMounted(async() => {
 
 async function Login() {
    
+    if(loginUsername.value == "" || loginPassword.value ==""){
+        alert("Veuillez rensigner les champs")
+        return
+    }
+
     try {
          
         //Sending login request to backend
@@ -58,6 +63,11 @@ async function Login() {
         
     } catch (error) {
         console.log(error);
+        if(error.status == 401){
+            alert("Identifiants invalides")
+        }else{
+            alert("Une erreur est survenue")
+        }
         
     }
 }
@@ -65,7 +75,16 @@ async function Login() {
     async function registerUser(){
         
         //TODO: Validation
-        
+        if(registerUsernme.value == "" || registerPassword.value ==""
+            || name.value =="" || firstname.value == ""
+            || email.value == "" || adress.value == ""
+            ||zipcode.value == "" ||country.value == ""
+    
+        ){
+        alert("Veuillez rensigner les champs")
+        return
+    }
+
         //Register the user in DB
         try {
             const res = await axios.post("http://localhost:3000/register", {
@@ -92,19 +111,19 @@ async function Login() {
 
 <template>
 
-    <h3> Connectez-vous et obtenez des réductions exclusives  </h3>
+    <h3> Connectez-vous et achetez vos vêtements préférés   </h3>
     <form class="mb-5 mt-4 mx-5">
         <div class="form-group">
             <label> Pseudo </label>
-            <input class="form-control" type="text" v-model="loginUsername" />
+            <input  class="form-control" type="text" v-model="loginUsername" />
         </div>
         
-        <div class="form-group">
+        <div  class="form-group">
             <label> Mot de passe </label>
-            <input class="form-control" type="password" v-model="loginPassword" />
+            <input  class="form-control" type="password" v-model="loginPassword" />
         </div>
 
-    <button class="btn btn-primary" @click.prevent="Login"> Se connecter </button>
+    <button  class="btn btn-primary" @click.prevent="Login"> Se connecter </button>
 
     </form>
 

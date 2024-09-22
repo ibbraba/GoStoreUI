@@ -1,12 +1,12 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 
 
 const props = defineProps(["singleCommand"])
 const route = useRoute()
-const id = route.params.id
+const commandId = route.params.id
 const command = ref({})
 
 onMounted(() => {
@@ -15,7 +15,7 @@ onMounted(() => {
 
 async function getCommand() {
     try {
-        let res = await axios.get("http://localhost:3000/command/" + id)
+        let res = await axios.get("http://localhost:3000/command/" + commandId)
         console.log(res.data);
         
         command.value = res.data;
@@ -59,8 +59,8 @@ async function getCommand() {
         <div class="command-total">  
 
             <p> Total : {{ command.price }}€ </p>
-            <p> Statut : N/A</p>
-
+            <p> Statut : {{ command.validated ? "Payée" : "En attente de paiement" }}</p>
+            <RouterLink v-if="!command.validated" class="btn btn-primary"  :to="{ name: 'command-validate', params: { id: commandId }}" > Payer la commande </RouterLink>
         </div>
 
     </div>

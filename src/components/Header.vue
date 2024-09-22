@@ -1,9 +1,14 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { getConnectedUser } from '../userRequests';
 
 //Gets the user in localstorage
-const user = ref((JSON.parse(localStorage.getItem('user'))))
+const user = ref(null)
+
+onMounted(async () => {
+    user.value = await getConnectedUser()
+})
 
 
 
@@ -20,10 +25,10 @@ const user = ref((JSON.parse(localStorage.getItem('user'))))
         <nav class="mt-5">
             <ul>
                 <li>
-                    <RouterLink :to="{ name: 'home' }">HomePage</RouterLink>
+                    <RouterLink :to="{ name: 'home' }">Acceuil</RouterLink>
                 </li>
                 <li>
-                    <RouterLink v-if="user":to="{ name: 'my-page', params : { _id : user.id}}">{{user.username}}</RouterLink>    
+                    <RouterLink v-if="user != null":to="{ name: 'my-page', params : { _id : user.userId}}">{{user.username}}</RouterLink>    
                     <RouterLink v-else :to="{ name: 'login' }">Login</RouterLink>
                 </li>
                 <li>
@@ -63,6 +68,10 @@ ul {
     flex-direction: row;
     justify-content: space-evenly;
     width: 90%;
+    PADDING: 0px;
+    MARGIN: 0 auto;
+    margin-top: -5px;
+    margin-bottom: 10px;
 }
 
 nav a {
