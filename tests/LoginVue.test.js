@@ -17,3 +17,17 @@ describe("Elements in forms", () => {
 
 
 })
+
+
+/*
+  it('Shows query result if fields are completed', () => {
+    cy.mount(Login)
+    cy.get('input[name="input-pseudo"]').type("User")
+    cy.get('input[name="input-password"]').type("password")
+  
+    cy.get('.register-button').click()
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Veuillez renseigner les champs')
+    })
+  })
+    */

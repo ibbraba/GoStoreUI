@@ -33,7 +33,7 @@ onMounted(async() => {
 async function Login() {
    
     if(loginUsername.value == "" || loginPassword.value ==""){
-        alert("Veuillez rensigner les champs")
+        alert("Veuillez renseigner les champs")
         return
     }
 
@@ -79,7 +79,7 @@ async function Login() {
             ||zipcode.value == "" ||country.value == ""
     
         ){
-        alert("Veuillez rensigner les champs")
+        alert("Veuillez renseigner les champs")
         return
     }
 
@@ -141,12 +141,12 @@ async function Login() {
 
         <div class="form-group">
             <label for="">Name</label>
-            <input class="form-control" type="text" v-model="name"/> 
+            <input class=" form-control" type="text" v-model="name"/> 
         </div>
 
         <div class="form-group">
             <label for="">Firstname</label>
-            <input class="form-control" type="text" v-model="firstname"/> 
+            <input class="form-control" name="register-firstname" type="text" v-model="firstname"/> 
         </div>
         
         <div class="form-group">
@@ -169,7 +169,7 @@ async function Login() {
             <input class="form-control" type="text" v-model="country"/> 
         </div>
 
-        <button class="register-button btn btn-primary" @click.prevent="registerUser"> S'inscrire </button>
+        <button  class="register-button btn btn-primary" @click.prevent="registerUser"> S'inscrire </button>
     </form>
 
 </template>
