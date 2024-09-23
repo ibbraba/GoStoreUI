@@ -21,6 +21,7 @@ const count = ref(0)
 const products = ref([])
 
 //Fetch products from DB
+
 async function LoadProducts() {
     let res = await axios.get("http://localhost:3000/products")
     console.log(res.data);
@@ -32,16 +33,15 @@ async function LoadProducts() {
 
 <template>
 
-
-  <h1>{{ msg }}</h1>
-  <h2> Nos produits </h2>
+ 
+  <h2 class="page-title"> Nos produits </h2>
   <div v-for="product of products" class="product-list-container">
     <div class="card" style="width: 18rem;">
   <img class="card-img-top"  :src="product.imageurl" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{ product.type }}</h5>
-    <p class="card-text">{{ product.prix }}€</p>
-    <button class="btn btn-light">
+    <h5 class="card-title">{{ product && product.type }}</h5>
+    <p class="card-text">{{ product && product.prix }}€</p>
+    <button class="btn btn-light see-product">
 
       <RouterLink class="btn btn-primary" :to="{ name: 'single-product', params: { _id: product._id }}">
         Voir le produit
@@ -49,13 +49,7 @@ async function LoadProducts() {
     </button>
   </div>
 </div>
-
-
    </div>
-
-   
-
-
 </template>
 
 <style scoped>

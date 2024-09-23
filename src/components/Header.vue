@@ -7,7 +7,7 @@ import { getConnectedUser } from '../userRequests';
 const user = ref(null)
 
 onMounted(async () => {
-    user.value = await getConnectedUser()
+  //  user.value = await getConnectedUser()
 })
 
 
@@ -18,8 +18,8 @@ onMounted(async () => {
 
     <header>
         <div class="gostore">
-            <h1 class="mt-4">GoStore</h1>
-            <h4 class="mt-2">Crée ton style</h4>
+            <h1 class="title mt-4">GoStore</h1>
+            <h4 class=" mt-2">Crée ton style</h4>
 
         </div>
         <nav class="mt-5">
@@ -28,8 +28,8 @@ onMounted(async () => {
                     <RouterLink :to="{ name: 'home' }">Acceuil</RouterLink>
                 </li>
                 <li>
-                    <RouterLink v-if="user != null":to="{ name: 'my-page', params : { _id : user.userId}}">{{user.username}}</RouterLink>    
-                    <RouterLink v-else :to="{ name: 'login' }">Login</RouterLink>
+                    <RouterLink class="nav-user" v-if="user != null":to="{ name: 'my-page', params : { _id : user.userId}}">{{user.username}}</RouterLink>    
+                    <RouterLink  class="nav-user" v-else :to="{ name: 'login' }">Login</RouterLink>
                 </li>
                 <li>
                     <RouterLink :to="{name : 'cart'}"> Panier </RouterLink>

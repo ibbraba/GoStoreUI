@@ -19,7 +19,7 @@ const product = ref({})
 async function LoadProduct(params) {
     try {
         const res = await axios.get("http://localhost:3000/product/" + _id)
-        console.log(res);
+        console.log(res.data);
         product.value = res.data
     } catch (error) {
         console.log(error);

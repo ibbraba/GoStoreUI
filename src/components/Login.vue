@@ -6,8 +6,6 @@ import { ensureValidToken } from '../userRequests';
 
 const router = useRouter()
 
-
-
 const loginUsername = ref("")
 const loginPassword = ref("")
 
@@ -115,15 +113,15 @@ async function Login() {
     <form class="mb-5 mt-4 mx-5">
         <div class="form-group">
             <label> Pseudo </label>
-            <input  class="form-control" type="text" v-model="loginUsername" />
+            <input id="login-input-username" name="input-pseudo" class="form-control" type="text" v-model="loginUsername" />
         </div>
         
         <div  class="form-group">
             <label> Mot de passe </label>
-            <input  class="form-control" type="password" v-model="loginPassword" />
+            <input id="login-input-password" name="input-password" class="form-control" type="password" v-model="loginPassword" />
         </div>
 
-    <button  class="btn btn-primary" @click.prevent="Login"> Se connecter </button>
+    <button id="connect"class="connect btn btn-primary" @click.prevent="Login"> Se connecter </button>
 
     </form>
 
@@ -171,7 +169,7 @@ async function Login() {
             <input class="form-control" type="text" v-model="country"/> 
         </div>
 
-        <button class="btn btn-primary" @click.prevent="registerUser"> S'inscrire </button>
+        <button class="register-button btn btn-primary" @click.prevent="registerUser"> S'inscrire </button>
     </form>
 
 </template>
