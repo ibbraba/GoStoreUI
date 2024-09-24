@@ -1,5 +1,5 @@
 <script setup>
-import axios from 'axios';
+
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ensureValidToken, getConnectedUser } from '../userRequests';

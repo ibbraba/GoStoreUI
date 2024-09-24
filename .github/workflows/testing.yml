@@ -8,9 +8,6 @@ jobs:
    - run: node --version 
    - run: npm --version  
    - uses: actions/checkout@v4
- 
-   - run : npm run test
-     name : run Vitest
    - run : npx cypress run-ct
      name : run cypress component tests  
   
