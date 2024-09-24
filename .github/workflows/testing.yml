@@ -1,0 +1,17 @@
+name: Pipeline for tests
+on : [push, workflow_dispatch]
+jobs: 
+  build-node : 
+   runs-on : windows-latest
+
+   steps:
+   - run: node --version 
+   - run: npm --version  
+   - uses: actions/checkout@v4
+   - run : npm install 
+     name : Install depedencies 
+   - run : npm run test
+     name : run Vitest
+   - run : npx cypress run-ct
+     name : run cypress component tests  
+  

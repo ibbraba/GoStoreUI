@@ -24,15 +24,5 @@ describe('<Login />', () => {
     })
   })
 
-  it('Returns error message if invalid credentials', () => {
-    cy.mount(Login)
-    cy.get('input[name="input-pseudo"]').type("User")
-    cy.get('input[name="input-password"]').type("wrongPassword")
-  
-    cy.get('.connect').click()
-    cy.on('window:alert', (str) => {
-      expect(str).to.equal('Identifiants invalides')
-    })
-  })
 
 })

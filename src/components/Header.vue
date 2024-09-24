@@ -7,7 +7,7 @@ import { getConnectedUser } from '../userRequests';
 const user = ref(null)
 
 onMounted(async () => {
-  //  user.value = await getConnectedUser()
+    user.value = await getConnectedUser()
 })
 
 
@@ -28,7 +28,7 @@ onMounted(async () => {
                     <RouterLink :to="{ name: 'home' }">Acceuil</RouterLink>
                 </li>
                 <li>
-                    <RouterLink class="nav-user" v-if="user != null":to="{ name: 'my-page', params : { _id : user.userId}}">{{user.username}}</RouterLink>    
+                    <RouterLink class="nav-user" v-if="user":to="{ name: 'my-page', params : { _id : user.userId}}">{{user.username}}</RouterLink>    
                     <RouterLink  class="nav-user" v-else :to="{ name: 'login' }">Login</RouterLink>
                 </li>
                 <li>

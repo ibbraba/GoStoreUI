@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ensureValidToken } from '../userRequests';
+import { ensureValidToken, getConnectedUser } from '../userRequests';
 
 const router = useRouter()
 
@@ -22,10 +22,14 @@ const country = ref("")
 onMounted(async() => {
 
     // Redirects to user page if already connected 
-    const token = await ensureValidToken()
-    const user = JSON.parse(localStorage.getItem('user'))
-    if(token && user ){
-        await router.push("/my-page/" + user.id)
+    const user = await getConnectedUser()
+   // const user = JSON.parse(localStorage.getItem('user'))
+    if(user ){
+
+        
+        console.log("User already logged");
+        
+        await router.push("/my-page/" + user.userId)
         router.go(0)
     }
 })
