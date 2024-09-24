@@ -1,5 +1,25 @@
-# Vue 3 + Vite
+# GoStore
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Site de vente de vêtements. Ceci est une démo.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Fonctionnalité présentes
+
+- Base de données MongoDB (3 collections)
+- Système d'authentification 
+- Système d'autorisation via JSON Web Token
+- 11 endpoints 
+- Hash de mot de passe
+- Tests unitaires du server Express
+- 8 écrans
+- Store pinia
+- Tests unitaires 
+- Test Cypress
+- 2 pipelines de Github Action 
+
+Un dump de la base de données est inclus dans le repository du server
+
+### Problème 
+Du a un problème avec la librairie axios, les tests unitaire de l'UI n'ont pas pu être inclus dans la pipeline. 
+En cas de problème lors de l'execution des ces tests, modifier le fichier node_modules/axios/lib/helpers/isURLSameOrigin.js:41:44 et retirer la condition ternaire
+
+## Enjoy
